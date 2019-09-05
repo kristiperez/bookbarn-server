@@ -36,23 +36,23 @@ app.post('/add-book',(req,res) => {
 
 })
 
-app.post('/delete-book',(req,res) => {
+app.post('/delete-book',async (req,res) => {
     let bookId = parseInt(req.body.bookId)
 
-    let result = models.Book.destroy({
+    models.Book.destroy({
         where: {
             id: bookId
         }
-    }).then((result) => {
-        console.log(result)
-        res.redirect('/books')
+    }).then(() => {
+        console.log()
+        res.json({deleted: true})
     })
 
 })
 
-app.get('/express-backend',(req,res) => {
-    res.send({express: "BACKEND CONNECTED TO REACT"})
-})
+// app.get('/express-backend',(req,res) => {
+//     res.send({express: "BACKEND CONNECTED TO REACT"})
+// })
 
 
 app.listen(3001,() => {console.log('Server is running...')})
